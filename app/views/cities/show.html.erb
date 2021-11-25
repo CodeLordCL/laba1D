@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @city.name %>
+</p>
+
+<p>
+  <strong>Age:</strong>
+  <%= @city.age %>
+</p>
+
+<p>
+  <strong>Size:</strong>
+  <%= @city.size %>
+</p>
+
+<p>Streets</p>
+
+<% @city.streets.each do |street| %>
+  <p>Name</p>
+  <%= street.name %>
+  <p>Building count</p>
+  <%= street.building_count%>
+<% end %>
+
+<p>Add street</p>
+
+<%= form_with url: "/streets", method: :post do |form| %>
+  <%= form.hidden_field :city_id %>
+  <%= hidden_field_tag 'city_id', @city.id  %>
+  <%= form.label :title, "Street name" %>
+  <%= form.text_field :name %>
+  <%= form.label :title, "Building count" %>
+  <%= form.text_field :building_count %>
+  <%= form.submit "Add" %>
+<% end %>
+
+<%= link_to 'Edit', edit_city_path(@city) %> |
+<%= link_to 'Back', cities_path %>
